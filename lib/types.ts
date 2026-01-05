@@ -1,10 +1,6 @@
-export type Role = "employee" | "leader";
-
 export interface User {
   id: string;
   name: string;
-  role: Role;
-  team: string;
 }
 
 export interface Charity {
@@ -42,6 +38,7 @@ export interface Donation {
   paymentNote?: string;
   isPaid: boolean;
   createdAt: Date;
+  userName?: string;
 }
 
 export interface Guess {
@@ -56,6 +53,12 @@ export interface Guess {
   isPaid: boolean;
   charityId?: string; // where donations are directed
   donationId?: string; // reference to the Donation record
+  userName?: string;
+}
+
+// Optional display name stored on guesses/donations for guest flows
+export interface NamedRecord {
+  userName?: string;
 }
 
 export interface ProAccess {

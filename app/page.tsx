@@ -15,12 +15,12 @@ export default function HomePage() {
         </h1>
         <p className="text-gray-700 mb-4">
           Enter your guess for our company&apos;s highest single-day internet
-          orders for the event, donate to move your team up the leaderboard, and
+          orders for the event, donate to climb the leaderboard, and
           compete for prizes while giving back.
         </p>
         <ul className="list-disc list-inside space-y-1 text-gray-700 mb-6">
           <li>$10 to enter and lock in your guess.</li>
-          <li>Donate more to boost your team&apos;s ranking.</li>
+          <li>Donate more to climb the leaderboard.</li>
           <li>Closest guess wins half the prize pot; the other half goes to a charity of their choice.</li>
         </ul>
         <div className="flex flex-wrap gap-3">

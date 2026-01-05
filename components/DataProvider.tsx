@@ -54,7 +54,7 @@ const seedEvent: Event = {
   id: "e1",
   name: "Peak Orders – Holiday 2025",
   description:
-    "Guess the highest number of internet orders we'll hit in a single day during the holiday event. Entry is $10, supports charity, and you can donate more to boost your team!",
+    "Guess the highest number of internet orders we'll hit in a single day during the holiday event. Entry is $10, supports charity, and you can donate more to climb the leaderboard!",
   start: new Date(),
   end: new Date(new Date().getTime() + 7 * 24 * 60 * 60 * 1000),
   registrationOpensAt: new Date(new Date().getTime() + 1 * 60 * 60 * 1000), // Opens in 1 hour
@@ -114,8 +114,13 @@ export function DataProvider({ children }: { children: ReactNode }) {
       isPaid: false,
       charityId
     };
+    // attach display name for guest flows
+    if (user.name) {
+      (guess as any).userName = user.name;
+    }
     setGuesses((prev) => [...prev, guess]);
   };
+
 
   const addDonation = (guessId: string, amount: number) => {
     setGuesses((prev) =>
@@ -181,6 +186,10 @@ export function DataProvider({ children }: { children: ReactNode }) {
       isPaid: false,
       createdAt: new Date(),
     };
+    // try to attach userName when available (guest flow)
+    if (user && user.id === userId) {
+      (donation as any).userName = user.name;
+    }
     setDonations((prev) => [...prev, donation]);
   };
 

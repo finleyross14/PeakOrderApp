@@ -1,42 +1,28 @@
 "use client";
 
 import React, { createContext, useContext, useState, ReactNode } from "react";
-import type { Role, User } from "../lib/types";
+import type { User } from "../lib/types";
 
 interface AuthContextValue {
   user: User | null;
-  loginAs: (role: Role) => void;
+  joinAsGuest: (name: string) => void;
   logout: () => void;
 }
 
 const AuthContext = createContext<AuthContextValue | undefined>(undefined);
 
-const demoUsers: Record<Role, User> = {
-  leader: {
-    id: "leader-1",
-    name: "Alex Leader",
-    role: "leader",
-    team: "Executive Team"
-  },
-  employee: {
-    id: "employee-1",
-    name: "Taylor Employee",
-    role: "employee",
-    team: "Team Phoenix"
-  }
-};
-
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
 
-  const loginAs = (role: Role) => {
-    setUser(demoUsers[role]);
+  const joinAsGuest = (name: string) => {
+    const id = `guest-${new Date().getTime()}`;
+    setUser({ id, name });
   };
 
   const logout = () => setUser(null);
 
   return (
-    <AuthContext.Provider value={{ user, loginAs, logout }}>
+    <AuthContext.Provider value={{ user, joinAsGuest, logout }}>
       {children}
     </AuthContext.Provider>
   );

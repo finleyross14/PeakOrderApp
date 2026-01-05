@@ -6,7 +6,7 @@ import { NavBar } from "../components/NavBar";
 
 export const metadata = {
   title: "Peak Orders Charity Challenge",
-  description: "Guess the peak orders, support charity, and boost your team."
+  description: "Guess the peak orders, support charity, and climb the leaderboard."
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

@@ -17,10 +17,10 @@ export default function EventPage() {
   const [donationAmount, setDonationAmount] = useState("");
 
   if (!user) {
-    return <p className="text-red-600 text-lg">Please log in to view events.</p>;
+    return <p className="text-red-600 text-lg">Enter your name to view events.</p>;
   }
 
-  if (showCreateEvent && user.role === "leader") {
+  if (showCreateEvent) {
     return (
       <div className="space-y-4">
         <button
@@ -34,7 +34,7 @@ export default function EventPage() {
           onCreateEvent={(event) => {
             addEvent(event);
             setShowCreateEvent(false);
-            alert("Event created successfully!");
+            alert("Event created and submitted for backend approval!");
           }}
         />
       </div>
@@ -46,14 +46,12 @@ export default function EventPage() {
       <div className="space-y-4 bg-white p-6 rounded border">
         <h2 className="text-xl font-semibold">Events</h2>
         <p className="text-gray-600">No active event right now.</p>
-        {user.role === "leader" && (
-          <button
-            onClick={() => setShowCreateEvent(true)}
-            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-          >
-            Create New Event
-          </button>
-        )}
+        <button
+          onClick={() => setShowCreateEvent(true)}
+          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+        >
+          Create New Event
+        </button>
       </div>
     );
   }
@@ -74,14 +72,12 @@ export default function EventPage() {
             <h1 className="text-3xl font-bold">{activeEvent.name}</h1>
             <p className="text-gray-700 mt-2">{activeEvent.description}</p>
           </div>
-          {user.role === "leader" && (
-            <button
-              onClick={() => setShowCreateEvent(true)}
-              className="bg-green-600 text-white px-3 py-2 rounded text-sm hover:bg-green-700"
-            >
-              + Create Event
-            </button>
-          )}
+          <button
+            onClick={() => setShowCreateEvent(true)}
+            className="bg-green-600 text-white px-3 py-2 rounded text-sm hover:bg-green-700"
+          >
+            + Create Event
+          </button>
         </div>
 
         <div className="grid md:grid-cols-3 gap-4 text-sm">
@@ -121,7 +117,7 @@ export default function EventPage() {
             onSubmitGuess={(value, paymentMethod, paymentNote, charityId) => {
               // Record the donation first
               recordDonation(user.id, activeEvent.id, activeEvent.entryFee, paymentMethod, paymentNote);
-              alert("Guess submitted! Leadership will verify your donation and activate your entry.");
+              alert("Guess submitted! The backend will verify your donation and activate your entry.");
             }}
             onDonate={() => setShowDonationForm(true)}
           />

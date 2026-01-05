@@ -48,6 +48,7 @@ export default function CreateEventForm({ charities, onCreateEvent }: CreateEven
       return;
     }
 
+    // Events are created as pending approval by backend
     const newEvent: Omit<Event, "id"> = {
       name,
       description,
@@ -57,8 +58,8 @@ export default function CreateEventForm({ charities, onCreateEvent }: CreateEven
       proFee: parseFloat(proFee) || 0,
       registrationOpensAt: regOpens,
       charityIds: selectedCharities,
-      isActive: true,
-      createdBy: "current-user-id", // TODO: replace with actual userId from auth
+      isActive: false, // will be activated after backend approval
+      createdBy: "pending-approval",
       createdAt: new Date(),
     };
 
@@ -78,6 +79,8 @@ export default function CreateEventForm({ charities, onCreateEvent }: CreateEven
   return (
     <form onSubmit={handleSubmit} className="space-y-4 bg-white p-6 rounded border">
       <h2 className="text-xl font-semibold">Create New Event</h2>
+
+      <p className="text-sm text-gray-600">Events you create will be submitted for backend approval before going live.</p>
 
       {error && <div className="text-red-600 bg-red-100 p-2 rounded">{error}</div>}
 
